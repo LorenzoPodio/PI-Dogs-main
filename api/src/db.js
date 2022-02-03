@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST, YOUR_API_KEY
+  DB_USER, DB_PASSWORD, DB_HOST
 } = process.env;
 console.log('DB_USER', DB_USER);
 // console.log('YOUR_API_KEY', YOUR_API_KEY);
