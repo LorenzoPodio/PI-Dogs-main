@@ -7,9 +7,10 @@ const getDogsById = async (req, res) => {
     console.log('idRaza', idRaza);
     const dogById = await allDogs.filter(d => d.id == idRaza);
     console.log('dogById', dogById);
-    return res.json(dogById);
+    if(dogById.length !== 0) return res.json(dogById);
+    else return res.status(404).send('No existe ninguna raza con el id otorgado');
   } catch (error) {
-    res.status(404).send(error);
+    res.status(400).send(error);
   }
 };
 
