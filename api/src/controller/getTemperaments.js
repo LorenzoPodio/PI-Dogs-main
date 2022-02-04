@@ -7,9 +7,11 @@ const getTemperaments = async (req, res) => {
   try {
     const { data } = await axios.get(URL);
     const temperaments = await data.map(t => {
-      if (t.temperament) return t.temperament = `${t.temperament.split(', ')},`;
-    }).join('').split(',');
-    temperaments.forEach(t => {
+      if (t.temperament) return t.temperament = t.temperament.split(', ');
+    }).flat().sort();
+    const noDupliTemps = [...new Set(temperaments)];
+    noDupliTemps.pop();
+    noDupliTemps.forEach(t => {
       Temperament.findOrCreate({
         where: {name: t}
       })      
