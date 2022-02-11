@@ -1,60 +1,99 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllDogs } from "../../redux/actions";
+import { getAllDogs, filterDogsByTemperament, filterOrigin, alphabeticSort, weightSort, getAllTemps } from "../../redux/actions";
 import { DogCard } from "../DogCard/DogCard";
+import { Paginado } from "../Pagination/Pagination";
 import './Dogs.css';
+
 
 export const Dogs = () => {
   const dispatch = useDispatch();
   const allDogs = useSelector(state => state.dogs);
+  const allTemps = useSelector(state => state.temperaments);
+  console.log('allTemps', allTemps);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dogsPerPage, setDogsPerPage] = useState(8);
+  const indexLastDog = currentPage * dogsPerPage;
+  const indexFirstDog = indexLastDog - dogsPerPage;
+  const currentDogs = allDogs.slice(indexFirstDog, indexLastDog);
+
+  const paginado = (pageNum) => {
+    setCurrentPage(pageNum)
+  }
 
   useEffect(() => {
     dispatch(getAllDogs());
-  },[dispatch]);
+  }, []);
+  
+  useEffect(() => {
+    dispatch(getAllTemps());
+  }, []);
+
+  const handleFilterTemps = (e) => {
+    dispatch(filterDogsByTemperament(e.target.value))
+  };
+  const handleFilterOrigin = (e) => {
+    dispatch(filterOrigin(e.target.value))
+  };
+  const handleAlphabeticSort = (e) => {
+    dispatch(alphabeticSort(e.target.value))
+  };
+  const handleWeightSort = (e) => {
+    dispatch(weightSort(e.target.value))
+  };
 
   return (
     <>
       <h1>Listado de Razas de Perro</h1>
       <div>
         <div>
-          <label>Orden Alfabético:</label>
-          <select>
-            <option value={'asc'}>Ascendente</option>
-            <option value={'desc'}>Descendente</option>
-          </select>
-          <label>Ordenar por peso:</label>
-          <select>
-            <option value={'asc'}>Ascendente</option>
-            <option value={'desc'}>Descendente</option>
-          </select>
+          <div>
+            <label>Orden Alfabético:</label>
+            <select onChange={e => handleAlphabeticSort(e)}>
+              <option value={'asc'}>Ascendente</option>
+              <option value={'desc'}>Descendente</option>
+            </select>
+            <label>Ordenar por peso:</label>
+            <select onChange={e => handleWeightSort(e)}>
+              <option value={'asc'}>Ascendente</option>
+              <option value={'desc'}>Descendente</option>
+            </select>
+          </div>
           <label>Filtrar por raza:</label>
-          <select>
+          <select onChange={e => handleFilterOrigin(e)}>
+            <option value={'Todos'}>Todos</option>
             <option value={'api'}>Existentes</option>
-            <option value={'db'}>Creados</option>
+            <option value={'db'}>Creadas</option>
           </select>
           <label>Filtrar por temperamento:</label>
-          <select>
-            <option value={'api'}>Existentes</option>
-            <option value={'db'}>Creados</option>
+          <select onChange={e => handleFilterTemps(e)}>
+            <option value={'Todos'}>Todos</option>
+            {
+              allTemps.map(t => <option value={t.name}>{t.name}</option>)
+            }
           </select>
         </div>
+        <Paginado
+          dogsPerPage={dogsPerPage}
+          allDogs={allDogs.length}
+          paginado={paginado}
+        />
         <div>
           {
-            allDogs?.map( d => {
+            currentDogs?.map(d => {
               return (
-                <>
-                  <DogCard
-                    name={d.name}
-                    image={d.image}
-                    temperament={d.temperament}
-                    weight={d.weight}
-                  />
-                </>
+                <DogCard
+                  key={d.id}
+                  name={d.name}
+                  image={d.image}
+                  temperament={d.temperament}
+                  weight={d.weight}
+                />
               )
             })
           }
         </div>
-      </div> 
+      </div>
     </>
   );
 };

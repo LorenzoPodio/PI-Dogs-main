@@ -8,7 +8,7 @@ export const DogCard = ({name, image, temperament, weight }) => {
       <div className='container'>
         <h3>Raza: {name}</h3>
         <h5>Temperamento: {temperament}</h5>
-        <h5>Peso: {weight}</h5>
+        <h5>Peso: {weight} kg</h5>
       </div>
     </div>
   );
