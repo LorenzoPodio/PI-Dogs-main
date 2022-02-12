@@ -1,16 +1,16 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
-import { NavBar } from './components/NavBar/NavBar';
 import { LandingPage } from './components/LandingPage/LandingPage';
 import { Dogs } from './components/Dogs/Dogs';
+import { CreateDog } from './components/CreateDog/CreateDog';
 
 function App() {
   return (
     <div className="App">
-      <NavBar/>
       <Routes>
         <Route exact path='/' element={<LandingPage/>}/>
         <Route path='/home'element={<Dogs/>}/>
+        <Route path='/dog/create'element={<CreateDog/>}/>
       </Routes>
     </div>
   );

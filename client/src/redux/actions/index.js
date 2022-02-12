@@ -6,8 +6,9 @@ export const FILTER_BY_TEMP = 'FILTER_BY_TEMP';
 export const FILTER_ORIGIN = 'FILTER_ORIGIN';
 export const ORDER_BY_BREED = 'ORDER_BY_BREED';
 export const ORDER_BY_WEIGHT = 'ORDER_BY_WEIGHT';
-export const CREATE_DOG = 'CREATE_DOG';
+export const POST_DOG = 'POST_DOG';
 export const GET_DOG = 'GET_DOG';
+export const GET_DOG_BY_NAME = 'GET_DOG_BY_NAME';
 
 const URL = 'http://localhost:3001'
 
@@ -21,7 +22,6 @@ export const getAllDogs = () => async dispatch => {
 
 export const getAllTemps = () => async dispatch => {
   const { data } = await axios(`${URL}/temperament`)
-  console.log('data', data);
   return dispatch({
     type: GET_ALL_TEMPS,
     payload: data
@@ -56,6 +56,18 @@ export const weightSort = (payload) => {
   }
 };
 
+export const getDogByName = (name) => async dispatch => {
+  try {
+    const { data } = await axios(`${URL}/dogs?name=${name}`)
+    return dispatch({
+      type: GET_DOG_BY_NAME,
+      payload: data
+    });
+  } catch (error) {
+    alert(error);
+  }
+};
+
 export const getDog = (id) => dispatch => {
   return fetch(`${URL}/dog/${id}`)
     .then(res => res.json())
@@ -66,3 +78,9 @@ export const getDog = (id) => dispatch => {
       })
     });
 };
+
+export const postDog = (payload) => async dispatch => {
+  const res = await axios.post(URL+'/dog', payload);
+  console.log('posted dog', res);
+  return res;
+}

@@ -1,12 +1,13 @@
 import { 
-  CREATE_DOG, 
+  POST_DOG, 
   GET_ALL_DOGS, 
   GET_DOG, 
   FILTER_BY_TEMP,
   FILTER_ORIGIN, 
   GET_ALL_TEMPS, 
   ORDER_BY_BREED,
-  ORDER_BY_WEIGHT
+  ORDER_BY_WEIGHT,
+  GET_DOG_BY_NAME
 } from "../actions";
 
 const initialState = {
@@ -28,6 +29,11 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         temperaments: action.payload
+      };
+    case GET_DOG_BY_NAME:
+      return {
+        ...state,
+        dogs: action.payload
       };
     case FILTER_BY_TEMP:
       const allDogs = state.allDogs;
@@ -77,10 +83,9 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         dog: action.payload
       };
-    case CREATE_DOG:
+    case POST_DOG:
       return {
         ...state,
-        dogs: [...state.dogs, action.payload]
       };
     default:
       return state;
