@@ -8,8 +8,8 @@ export const Paginado = ({dogsPerPage, allDogs, paginado}) => {
   }
 
   return (
-    <nav className='papgination'>
-      <ul>
+    <nav>
+      <ul className='papgination'>
         {
           pageNumbers?.map(n => {
             return (

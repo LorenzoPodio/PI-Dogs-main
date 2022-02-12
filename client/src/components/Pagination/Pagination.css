@@ -1,9 +1,9 @@
 .pagination {
-  display: inline-block;
+  display: inline;
   border: 1px solid #ddd;
 }
 
-.pagination a {
+.pagination button {
   color: black;
   float: left;
   padding: 8px 16px;
