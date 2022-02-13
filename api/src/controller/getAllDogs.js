@@ -21,7 +21,7 @@ const getApiDogs = async () => {
 
 const getDbDogs = async () => {
   const arryTempToString = (temperament) =>{
-    return temperament.map(t => t.name).join(', ');
+    return temperament.map(t => t).join(', ');
   };
 
   const dogsDB = await Dog.findAll({
@@ -33,7 +33,7 @@ const getDbDogs = async () => {
   });
 
   const mapedDogs = dogsDB.map(d => {
-    console.log('d', d)
+    // console.log('d', d)
     return {
       id: d.id,
       name: d.name,
@@ -52,7 +52,7 @@ const getAllDogs = async () => {
   const apiDogs = await getApiDogs();
   const dbDogs = await getDbDogs();
   const allDogs = apiDogs.concat(dbDogs);
-  console.log('allDogs.length', allDogs.length)
+  // console.log('allDogs.length', allDogs.length)
   return allDogs;
 };
 

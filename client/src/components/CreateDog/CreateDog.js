@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Select } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAllTemps, postDog } from '../../redux/actions';
@@ -34,11 +34,14 @@ export const CreateDog = () => {
       ...minMaxInput,
       [e.target.name]: e.target.value
     })
-    console.log('weightMax', minMaxInput.weightMax)
+    console.log(e.target.name, e.target.value);
+    console.log('minMaxInput.weightMax', minMaxInput.weightMax);
+    let wMax;
+    if(e.target.name === 'weightMax') wMax = e.target.value;
     setInput({
       ...input,
       height: minMaxInput.heightMin+' - '+minMaxInput.heightMax,
-      weight: minMaxInput.weightMin+' - '+minMaxInput.weightMax,
+      weight: minMaxInput.weightMin+' - '+wMax,
     });
   }
 
@@ -99,14 +102,23 @@ export const CreateDog = () => {
           <input type={'text'} value={minMaxInput.weightMax} name='weightMax' onChange={e=>handleMinMax(e)}/>
         </div>
         <div>
-          <label>Esperanza de vida:</label>
+          <label>Años de vida:</label>
           <input type={'text'} value={input.life_span} name='life_span' onChange={e=>handleChange(e)}/>
         </div>
         <div>
-          <label>Años de vida:</label>
-          <select multiple onSelect={e => handleSelect(e)}>
+          <label>Temperamento:</label>
+          <select onChange={e => handleSelect(e)}>
             {temps.map(t => <option key={t.id} value={t.name}>{t.name}</option>)}
           </select>
+        </div>
+        <div>
+          {input.temperament.map( t => {
+            return(
+              <div key={t.id}>
+                <span>{t}</span>
+              </div>
+            )
+          })}
         </div>
         <button type='submit'>Crear Raza</button>
       </form>

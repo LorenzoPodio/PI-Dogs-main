@@ -13,7 +13,7 @@ const getDogs = async (req, res) => {
     }
   } else {
     try {
-      return res.json(allDogs);
+      return res.json(allDogs).status(200);
     } catch {
       return res.status(404).send('Hubo un error');
     }

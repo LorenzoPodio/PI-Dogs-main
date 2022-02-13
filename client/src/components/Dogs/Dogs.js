@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getAllDogs, filterDogsByTemperament, filterOrigin, alphabeticSort, weightSort, getAllTemps } from "../../redux/actions";
 import { DogCard } from "../DogCard/DogCard";
 import { NavBar } from "../NavBar/NavBar";
@@ -12,7 +13,7 @@ export const Dogs = () => {
   const allDogs = useSelector(state => state.dogs);
   const allTemps = useSelector(state => state.temperaments);
   const [currentPage, setCurrentPage] = useState(1);
-  const [dogsPerPage, setDogsPerPage] = useState(8);
+  const [dogsPerPage,] = useState(8);
   const indexLastDog = currentPage * dogsPerPage;
   const indexFirstDog = indexLastDog - dogsPerPage;
   const currentDogs = allDogs.slice(indexFirstDog, indexLastDog);
@@ -80,6 +81,7 @@ export const Dogs = () => {
               return (
                 <DogCard
                   key={d.id}
+                  id={d.id}
                   name={d.name}
                   image={d.image}
                   temperament={d.temperament}

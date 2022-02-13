@@ -7,7 +7,7 @@ export const FILTER_ORIGIN = 'FILTER_ORIGIN';
 export const ORDER_BY_BREED = 'ORDER_BY_BREED';
 export const ORDER_BY_WEIGHT = 'ORDER_BY_WEIGHT';
 export const POST_DOG = 'POST_DOG';
-export const GET_DOG = 'GET_DOG';
+export const GET_DOG_BY_ID = 'GET_DOG_BY_ID';
 export const GET_DOG_BY_NAME = 'GET_DOG_BY_NAME';
 
 const URL = 'http://localhost:3001'
@@ -58,7 +58,7 @@ export const weightSort = (payload) => {
 
 export const getDogByName = (name) => async dispatch => {
   try {
-    const { data } = await axios(`${URL}/dogs?name=${name}`)
+    const { data } = await axios(`${URL}/dogs?name=${name}`);
     return dispatch({
       type: GET_DOG_BY_NAME,
       payload: data
@@ -68,19 +68,26 @@ export const getDogByName = (name) => async dispatch => {
   }
 };
 
-export const getDog = (id) => dispatch => {
-  return fetch(`${URL}/dog/${id}`)
-    .then(res => res.json())
-    .then(dataJSON => {
-      dispatch({
-        type: GET_DOG,
-        payload: dataJSON
-      })
-    });
+export function getDogById(id) {
+  console.log('id action', id);
+  return function (dispatch) {
+    return axios.get(`${URL}/dogs/${id}`)
+      .then(res => {
+        console.log('RESPONSE DATA', res.data);
+        dispatch({
+          type: GET_DOG_BY_ID,
+          payload: res.data
+        })
+      });
+    // return dispatch({
+    //   type: GET_DOG_BY_ID,
+    //   payload: data
+    // })
+  }
 };
 
-export const postDog = (payload) => async dispatch => {
-  const res = await axios.post(URL+'/dog', payload);
+export const postDog = (payload) => async () => {
+  const res = await axios.post(URL + '/dog', payload);
   console.log('posted dog', res);
   return res;
 }

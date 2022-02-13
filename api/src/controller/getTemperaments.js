@@ -17,8 +17,8 @@ const getTemperaments = async (req, res) => {
       })      
     });
     const temperamentsDb = await Temperament.findAll();
-    console.log('temperamentsDb', temperamentsDb.length);
-    return res.json(temperamentsDb);
+    // console.log('temperamentsDb', temperamentsDb.length);
+    return res.json(temperamentsDb).status(200);
   } catch (error) {
     return res.status(404).send(error);
   }

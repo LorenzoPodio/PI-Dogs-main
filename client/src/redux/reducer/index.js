@@ -1,7 +1,7 @@
 import { 
   POST_DOG, 
   GET_ALL_DOGS, 
-  GET_DOG, 
+  GET_DOG_BY_ID, 
   FILTER_BY_TEMP,
   FILTER_ORIGIN, 
   GET_ALL_TEMPS, 
@@ -13,11 +13,13 @@ import {
 const initialState = {
   dogs: [],
   allDogs: [],
-  dog: {},
+  dogDetail: {},
   temperaments: []
 };
 
 export const rootReducer = (state = initialState, action) => {
+  console.log('action.payload REDUCER', action.payload);
+  console.log('action.type REDUCER', action.type);
   switch (action.type) {
     case GET_ALL_DOGS:
       return {
@@ -78,10 +80,10 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         dogs: weightSort
       };
-    case GET_DOG:
+    case GET_DOG_BY_ID:
       return {
         ...state,
-        dog: action.payload
+        dogDetail: action.payload
       };
     case POST_DOG:
       return {
