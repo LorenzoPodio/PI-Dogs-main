@@ -68,22 +68,26 @@ export const getDogByName = (name) => async dispatch => {
   }
 };
 
-export function getDogById(id) {
-  console.log('id action', id);
-  return function (dispatch) {
-    return axios.get(`${URL}/dogs/${id}`)
-      .then(res => {
-        console.log('RESPONSE DATA', res.data);
-        dispatch({
-          type: GET_DOG_BY_ID,
-          payload: res.data
-        })
-      });
-    // return dispatch({
-    //   type: GET_DOG_BY_ID,
-    //   payload: data
-    // })
-  }
+// export function getDogById(id) {
+//   console.log('id action', id);
+//   return function (dispatch) {
+//     return axios.get(`${URL}/dogs/${id}`)
+//       .then(res => {
+//         console.log('RESPONSE DATA', res.data);
+//         dispatch({
+//           type: GET_DOG_BY_ID,
+//           payload: res.data
+//         })
+//       });
+//   }
+// };
+
+export const getDogById = (id) => async dispatch => {
+  const { data } = await axios.get(`${URL}/dogs/${id}`)
+  return dispatch({
+    type: GET_DOG_BY_ID,
+    payload: data
+  })
 };
 
 export const postDog = (payload) => async () => {

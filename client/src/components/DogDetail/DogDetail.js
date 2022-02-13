@@ -33,9 +33,9 @@ export const DogDetail = ({ match }) => {
           <h1>{dog.name}</h1>
           <img src={dog.image} alt='img not found' width={'400px'} height='450px' />
           <h2>Altura: {dog.height}</h2>
-          <h2>Altura: {dog.weight}</h2>
-          <h2>Altura: {dog.life_span}</h2>
-          <h2>Altura: {dog.temperament}</h2>
+          <h2>Peso: {dog.weight}</h2>
+          <h2>Esperanza de vida: {dog.life_span}</h2>
+          <h2>Temperamento: {dog.temperament}</h2>
         </div>
       }
       <Link to={'/home'}>

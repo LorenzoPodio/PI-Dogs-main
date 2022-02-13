@@ -18,8 +18,6 @@ const initialState = {
 };
 
 export const rootReducer = (state = initialState, action) => {
-  console.log('action.payload REDUCER', action.payload);
-  console.log('action.type REDUCER', action.type);
   switch (action.type) {
     case GET_ALL_DOGS:
       return {
