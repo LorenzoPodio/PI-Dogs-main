@@ -1,0 +1,62 @@
+.background {
+  object-fit: cover;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  left: 0%;
+  z-index: -1;
+}
+
+.titulo {
+  font-family: 'Palatino Linotype';
+  font-size: x-large;
+  text-align: center;
+  background: #0000008c;
+  color: #ffffffb4;
+  width: 100%;
+  position: absolute;
+  top: 0%;
+}
+
+.slogan {
+  font-family: 'Ink Free';
+  font-size: x-small;
+  line-height: 30px;
+  word-spacing: 5px;
+  margin: 10px;
+}
+
+.container_btn {
+  position: absolute;
+  right: 5%;
+  top: 75%;
+}
+
+.container_btn button {
+  width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 30px;
+}
+
+button {
+  background: #000000;
+  color: white;
+  opacity: 0.75;
+  border: 2px solid #ffffffb4;
+}
+
+h1 {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+}
+
+input {
+  background: #000000;
+  border: 1px solid #ffffffb4;
+  border-radius: 5px;
+  opacity: 0.75;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Pagination.css';
+import s from './Pagination.module.css';
 
 export const Paginado = ({dogsPerPage, allDogs, paginado}) => {
   const pageNumbers = [];
@@ -8,8 +8,8 @@ export const Paginado = ({dogsPerPage, allDogs, paginado}) => {
   }
 
   return (
-    <nav>
-      <ul className='papgination'>
+    <div className={s.container}>
+      <ul>
         {
           pageNumbers?.map(n => {
             return (
@@ -20,6 +20,6 @@ export const Paginado = ({dogsPerPage, allDogs, paginado}) => {
           })
         }
       </ul>
-    </nav>
+    </div>
   );
 };

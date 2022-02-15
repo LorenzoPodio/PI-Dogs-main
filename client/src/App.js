@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import { Routes, Route } from 'react-router-dom'
 import { LandingPage } from './components/LandingPage/LandingPage';
 import { Dogs } from './components/Dogs/Dogs';
@@ -7,7 +7,7 @@ import { DogDetail } from './components/DogDetail/DogDetail';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Routes>
         <Route exact path='/' element={<LandingPage/>}/>
         <Route path='/home'element={<Dogs/>}/>

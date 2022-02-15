@@ -4,7 +4,9 @@ import { getAllDogs, filterDogsByTemperament, filterOrigin, alphabeticSort, weig
 import { DogCard } from "../DogCard/DogCard";
 import { NavBar } from "../NavBar/NavBar";
 import { Paginado } from "../Pagination/Pagination";
-import './Dogs.css';
+import s from './Dogs.module.css';
+import video3 from '../../images/video3.mp4';
+import { Link } from "react-router-dom";
 
 
 export const Dogs = () => {
@@ -40,41 +42,52 @@ export const Dogs = () => {
   };
 
   return (
-    <>
+    <div className={s.container}>
+      <video className={s.background} muted autoPlay loop src={video3} />
+      <h1>Estas son las razas de perros existentes</h1>
+      <Link to={'/'}>Home</Link>
+      <Link to={'/dog/create'}>Crear Raza</Link>
       <NavBar />
-      <h1>Listado de Razas de Perro</h1>
       <div>
         <div>
-          <label>Orden Alfabético:</label>
-          <select onChange={e => handleAlphabeticSort(e)}>
-            <option value={'asc'}>Ascendente</option>
-            <option value={'desc'}>Descendente</option>
-          </select>
-          <label>Ordenar por peso:</label>
-          <select onChange={e => handleWeightSort(e)}>
-            <option value={'asc'}>Ascendente</option>
-            <option value={'desc'}>Descendente</option>
-          </select>
+          <div className={s.filtro}>
+            <label>Orden Alfabético:</label>
+            <select className={s.select} onChange={e => handleAlphabeticSort(e)}>
+              <option value={'asc'}>Ascendente</option>
+              <option value={'desc'}>Descendente</option>
+            </select>
+          </div>
+          <div className={s.filtro}>
+            <label>Ordenar por peso:</label>
+            <select className={s.select} onChange={e => handleWeightSort(e)}>
+              <option value={'asc'}>Ascendente</option>
+              <option value={'desc'}>Descendente</option>
+            </select>
+          </div>
+          <div className={s.filtro}>
+            <label>Filtrar por raza:</label>
+            <select className={s.select} onChange={e => handleFilterOrigin(e)}>
+              <option value={'Todos'}>Todos</option>
+              <option value={'api'}>Existentes</option>
+              <option value={'db'}>Creadas</option>
+            </select>
+          </div>
+          <div className={s.filtro}>
+            <label>Filtrar por temperamento:</label>
+            <select className={s.select} onChange={e => handleFilterTemps(e)}>
+              <option value={'Todos'}>Todos</option>
+              {
+                allTemps.map(t => <option key={t.id} value={t.name}>{t.name}</option>)
+              }
+            </select>
+          </div>
         </div>
-        <label>Filtrar por raza:</label>
-        <select onChange={e => handleFilterOrigin(e)}>
-          <option value={'Todos'}>Todos</option>
-          <option value={'api'}>Existentes</option>
-          <option value={'db'}>Creadas</option>
-        </select>
-        <label>Filtrar por temperamento:</label>
-        <select onChange={e => handleFilterTemps(e)}>
-          <option value={'Todos'}>Todos</option>
-          {
-            allTemps.map(t => <option key={t.id} value={t.name}>{t.name}</option>)
-          }
-        </select>
         <Paginado
           dogsPerPage={dogsPerPage}
           allDogs={allDogs.length}
           paginado={paginado}
         />
-        <div>
+        <div className={s.cards_container}>
           {
             currentDogs?.map(d => {
               return (
@@ -91,6 +104,6 @@ export const Dogs = () => {
           }
         </div>
       </div>
-    </>
+    </div>
   );
 };

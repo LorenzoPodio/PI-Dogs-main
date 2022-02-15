@@ -5,11 +5,11 @@ import { getAllTemps, postDog } from '../../redux/actions';
 
 const validateForm = (input) => {
   let errors = {};
-  if (!input.name) errors.name = 'Debe ingresar un nombre';
-  else if(!/(^[a-zA-z])([^0-9]*)([a-z]*)$/.test(input.name)) errors.temperament = 'El nombre no puede contener numeros';
-  else if(!input.life_span) errors.life_span = 'Debe otorgar la esperanza de vida';
-  else if(!/(^[0-9])([^a-zA-z]*)( - )([^a-zA-z]*)(\d)/.test(input.name)) errors.life_span = 'Formato ingresado incorrecto';
-  else if(!input.temperament) errors.temperament = 'Debe seleccionar al menos un temperamento';
+  if (!input.name) return errors.name = 'Debe ingresar un nombre';
+  else if(!/(^[a-zA-z])([^0-9]*)([a-z]*)$/.test(input.name)) return errors.temperament = 'El nombre no puede contener numeros';
+  else if(!input.life_span) return errors.life_span = 'Debe otorgar la esperanza de vida';
+  else if(!/(^[0-9])([^a-zA-z]*)( - )([^a-zA-z]*)(\d)/.test(input.life_span)) return errors.life_span = 'Formato ingresado incorrecto';
+  else if(!input.temperament) return errors.temperament = 'Debe seleccionar al menos un temperamento';
     
   return errors;
 };

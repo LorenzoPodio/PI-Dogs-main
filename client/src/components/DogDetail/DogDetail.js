@@ -1,25 +1,17 @@
 import React, { useEffect } from 'react';
-import { getAllDogs, getDogById } from '../../redux/actions';
+import { getDogById } from '../../redux/actions';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const DogDetail = ({ match }) => {
   const { id } = useParams();
-  // const id = match.params.id;
   const dispatch = useDispatch();
   const dog = useSelector(state => state.dogDetail);
-  const dogs = useSelector(state => state.dogs);
   console.log('id COMPONENT', id);
 
-  // function getId(id) {
-  //   dispatch(getDogById(id))
-  // }
   useEffect(() => {
     dispatch(getDogById(id))
-  }, [id]);
-  useEffect(() => {
-    dispatch(getAllDogs())
-  }, []);
+  }, [dispatch, id]);
 
   // console.log('first', first)
   console.log('dog COMPONENT', dog);
