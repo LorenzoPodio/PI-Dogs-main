@@ -20,6 +20,26 @@
   margin: auto;
 }
 
+.link {
+  margin-left: 5px;
+  margin-right: 5px;
+  text-decoration: none;
+  color: #ffffff87;
+  background: #00000079;
+  border: 1px solid #ffffff87;
+}
+
+.linkHome{
+  position: absolute;
+  top: 0%;
+  right: 8%;
+}
+.linkCrear{
+  position: absolute;
+  top: 0%;
+  right: 0%;
+}
+
 /*SCROLLBAR*/
 ::-webkit-scrollbar {
   width: 10px;

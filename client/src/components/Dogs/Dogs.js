@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllDogs, filterDogsByTemperament, filterOrigin, alphabeticSort, weightSort, getAllTemps } from "../../redux/actions";
 import { DogCard } from "../DogCard/DogCard";
-import { NavBar } from "../NavBar/NavBar";
+import { SearchBar } from "../SearchBar/SearchBar";
 import { Paginado } from "../Pagination/Pagination";
 import s from './Dogs.module.css';
 import video3 from '../../images/video3.mp4';
@@ -45,9 +45,9 @@ export const Dogs = () => {
     <div className={s.container}>
       <video className={s.background} muted autoPlay loop src={video3} />
       <h1>Estas son las razas de perros existentes</h1>
-      <Link to={'/'}>Home</Link>
-      <Link to={'/dog/create'}>Crear Raza</Link>
-      <NavBar />
+      <Link className={s.link +' '+ s.linkHome} to={'/'}>Home</Link>
+      <Link className={s.link +' '+ s.linkCrear} to={'/dog/create'}>Crear Raza</Link>
+      <SearchBar />
       <div>
         <div>
           <div className={s.filtro}>

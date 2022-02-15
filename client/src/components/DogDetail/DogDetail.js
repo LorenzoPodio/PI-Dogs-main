@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { getDogById } from '../../redux/actions';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import s from './DogDetail.module.css';
+import video3 from '../../images/video3.mp4';
 
-export const DogDetail = ({ match }) => {
+export const DogDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const dog = useSelector(state => state.dogDetail);
@@ -18,18 +20,16 @@ export const DogDetail = ({ match }) => {
 
 
   return (
-    <div>
-      {
-
-        <div>
-          <h1>{dog.name}</h1>
-          <img src={dog.image} alt='img not found' width={'400px'} height='450px' />
-          <h2>Altura: {dog.height}</h2>
-          <h2>Peso: {dog.weight}</h2>
-          <h2>Esperanza de vida: {dog.life_span}</h2>
-          <h2>Temperamento: {dog.temperament}</h2>
-        </div>
-      }
+    <div className={s.container}>
+      <video className={s.background} muted autoPlay loop src={video3} />
+      <div>
+        <h1>{dog.name}</h1>
+        <img className={s.image} src={dog.image} alt='img not found'/>
+        <h2>Altura: {dog.height}</h2>
+        <h2>Peso: {dog.weight}</h2>
+        <h2>Esperanza de vida: {dog.life_span}</h2>
+        <h2>Temperamento: {dog.temperament}</h2>
+      </div>
       <Link to={'/home'}>
         <button>Volver</button>
       </Link>

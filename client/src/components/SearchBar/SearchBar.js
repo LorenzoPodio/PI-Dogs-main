@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getDogByName } from '../../redux/actions';
+import s from './SearchBar.madule.css';
 
-export const NavBar = () => {
+export const SearchBar = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
 
@@ -20,7 +21,7 @@ export const NavBar = () => {
   };
 
   return (
-    <div>
+    <div className={s.search}>
       <form onSubmit={e=>handleSubmit(e)}>
         <input type={'text'} placeholder='Buscar Raza..' value={name} onChange={e => handleInputChange(e)}/>
         <button type='submit'>Buscar</button>

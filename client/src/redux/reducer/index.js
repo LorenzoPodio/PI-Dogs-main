@@ -53,8 +53,8 @@ export const rootReducer = (state = initialState, action) => {
         dogs: originFilter
       };
     case ORDER_BY_BREED:
-      const alphabeticSort = action.payload === 'asc' ? state.dogs.sort((a, b) => a.name.localeCompare(b.name)) : 
-      state.dogs.sort((a, b) => {
+      const alphabeticSort = action.payload === 'asc' ? state.dogs.slice().sort((a, b) => a.name.localeCompare(b.name)) : 
+      state.dogs.slice().sort((a, b) => {
         if (a.name > b.name) return -1;
         if (a.name < b.name) return 1;
         return 0;
@@ -64,12 +64,12 @@ export const rootReducer = (state = initialState, action) => {
         dogs: alphabeticSort
       };
     case ORDER_BY_WEIGHT:
-      const weightSort = action.payload === 'asc' ? state.dogs.sort((a, b) => {
+      const weightSort = action.payload === 'asc' ? state.dogs.slice().sort((a, b) => {
         if (parseInt(a.weight.split(' - ').shift()) > parseInt(b.weight.split(' - ').shift())) return 1;
         if (parseInt(a.weight.split(' - ').shift()) < parseInt(b.weight.split(' - ').shift())) return -1;
         return 0;
       }) : 
-      state.dogs.sort((a, b) => {
+      state.dogs.slice().sort((a, b) => {
         if (parseInt(a.weight.split(' - ').shift()) > parseInt(b.weight.split(' - ').shift())) return -1;
         if (parseInt(a.weight.split(' - ').shift()) < parseInt(b.weight.split(' - ').shift())) return 1;
         return 0;

@@ -21,7 +21,7 @@ const getApiDogs = async () => {
 
 const getDbDogs = async () => {
   const arryTempToString = (temperament) =>{
-    return temperament.map(t => t).join(', ');
+    return temperament.map(t => t.name).join(', ');
   };
 
   const dogsDB = await Dog.findAll({

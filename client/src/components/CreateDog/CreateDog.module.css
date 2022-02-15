@@ -1,24 +1,73 @@
-.container {
-	background: linear-gradient(-45deg, #000000fa, #1f4d4afd, #a1c9fd, #2890b6, #175085, #0a3359, #000000) fixed;
-	background-size: cover;
-	animation: gradient 20s ease infinite;
-  padding: 0%;
-	position:absolute;
-  top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-  height:max-content;
+.background {
+  object-fit: cover;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  z-index: -1;
 }
 
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+.container{
+  background: #ffffff67;
+  height: 550px;
+  width: 50%;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-radius: 20px;
+  overflow-y: auto;
+}
+
+.container h1 {
+  margin-bottom: 40px;
+}
+
+.form {
+  text-align: left;
+}
+
+.form div{
+  display: block;
+  margin-bottom: 25px;
+}
+
+.form label {
+  margin-left: 70px;
+  margin-top: 20px;
+  margin-right: 50px;
+  width: 150px;
+  font-size: 25px;
+}
+
+.formInputs {
+  background: #0000009a;
+  border: 1px solid #ffffffb4;
+  color: #ffffff;
+  border-radius: 5px;
+  opacity: 0.75;
+  width: 300px;
+  height: 25px;
+  position: absolute;
+  right: 430px;
+}
+
+.form .submitBtn {
+  position: absolute;
+  right: 490px;
+  bottom: 60px;
+}
+
+.selectedTemps p {
+  width: 20px;
+  border: 1px solid #ffffffb4;
+  background: #ff00007b;
+  color: white;
+}
+
+.btnVolver{
+  position: absolute;
+  left: 27%;
+  bottom: 10%;
 }
