@@ -19,6 +19,14 @@ const initialState = {
 
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'FILTER_FROM':
+      const allDoguies = state.allDogs;
+      console.log('allDoguies', allDoguies)
+      const filterFrom = action.payload === 'Todos' ? allDoguies : allDoguies.filter(o => o.origin?.includes(action.payload));
+      return{
+        ...state,
+        dogs: filterFrom
+      }
     case GET_ALL_DOGS:
       return {
         ...state,
@@ -45,7 +53,7 @@ export const rootReducer = (state = initialState, action) => {
     case FILTER_ORIGIN:
       const dogsAll = state.allDogs;
       let originFilter = [];
-      if (action.payload === 'db') originFilter = dogsAll.filter(d => typeof(d.id)==='string');
+      if (action.payload === 'db') originFilter = dogsAll.slice().filter(d => typeof(d.id)==='string');
       else if (action.payload === 'api') originFilter = dogsAll.filter(d => typeof(d.id)!=='string');
       else originFilter = dogsAll;
       return {

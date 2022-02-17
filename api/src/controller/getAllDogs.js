@@ -12,8 +12,9 @@ const getApiDogs = async () => {
       height: d.height.metric,
       weight: d.weight.metric,
       life_span: d.life_span,
-      ...(d.temperament ? { temperament: d.temperament } : { temperament: 'Default' }),
-      ...(d.image ? { image: d.image.url } : { image: 'https://icon-library.com/images/dog-icon-vector/dog-icon-vector-4.jpg' })
+      ...(d.temperament ? { temperament: d.temperament } : { temperament: 'Unknown' }),
+      ...(d.image ? { image: d.image.url } : { image: 'https://icon-library.com/images/dog-icon-vector/dog-icon-vector-4.jpg' }),
+      ...(d.origin ? {origin: d.origin } : {origin: 'Unknown' })
     }
   });
   return dataToSend;

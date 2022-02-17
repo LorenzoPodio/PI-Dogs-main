@@ -25,6 +25,7 @@ export const DogDetail = () => {
       <div>
         <h1>{dog.name}</h1>
         <img className={s.image} src={dog.image} alt='img not found'/>
+        <h2>Origen: {dog.origin}</h2>
         <h2>Altura: {dog.height}</h2>
         <h2>Peso: {dog.weight}</h2>
         <h2>Esperanza de vida: {dog.life_span}</h2>

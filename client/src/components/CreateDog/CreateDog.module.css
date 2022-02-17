@@ -29,16 +29,22 @@
 }
 
 .form div{
-  display: block;
-  margin-bottom: 25px;
+  display: inline-block;
+  margin-bottom: 20px;
 }
 
 .form label {
   margin-left: 70px;
-  margin-top: 20px;
-  margin-right: 50px;
-  width: 150px;
+  margin-right: 40px;
+  width: 200px;
   font-size: 25px;
+  display: inline-block;
+}
+
+.form p{
+  margin-top: 1%;
+  margin-left: 55%;
+  margin-bottom: 0%;
 }
 
 .formInputs {
@@ -49,8 +55,7 @@
   opacity: 0.75;
   width: 300px;
   height: 25px;
-  position: absolute;
-  right: 430px;
+  margin-right: 20px;
 }
 
 .form .submitBtn {
@@ -59,7 +64,7 @@
   bottom: 60px;
 }
 
-.selectedTemps p {
+.selectedTemps button {
   width: 20px;
   border: 1px solid #ffffffb4;
   background: #ff00007b;

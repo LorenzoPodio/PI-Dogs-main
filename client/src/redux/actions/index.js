@@ -42,6 +42,13 @@ export const filterOrigin = (payload) => {
   }
 };
 
+export const filterFrom = (payload) => {
+  return {
+    type: 'FILTER_FROM',
+    payload
+  }
+}
+
 export const alphabeticSort = (payload) => {
   return {
     type: ORDER_BY_BREED,
@@ -64,34 +71,40 @@ export const getDogByName = (name) => async dispatch => {
       payload: data
     });
   } catch (error) {
-    alert(error);
+    alert('No existe ningún perro con el nombre: '+ name);
   }
 };
 
-// export function getDogById(id) {
-//   console.log('id action', id);
-//   return function (dispatch) {
-//     return axios.get(`${URL}/dogs/${id}`)
-//       .then(res => {
-//         console.log('RESPONSE DATA', res.data);
-//         dispatch({
-//           type: GET_DOG_BY_ID,
-//           payload: res.data
-//         })
-//       });
-//   }
+export const getDogById = id => dispatch => {
+  try {
+    return axios(`${URL}/dogs/${id}`)
+    .then(res => {
+      dispatch({
+        type: GET_DOG_BY_ID,
+        payload: res.data
+      });
+    });
+  } catch {
+    alert('No se encontró ningún perro con el id: ' + id);
+  }
+}
+
+// export const getDogById = (id) => async dispatch => {
+//   const { data } = await axios.get(`${URL}/dogs/${id}`)
+//   return dispatch({
+//     type: GET_DOG_BY_ID,
+//     payload: data
+//   })
 // };
 
-export const getDogById = (id) => async dispatch => {
-  const { data } = await axios.get(`${URL}/dogs/${id}`)
-  return dispatch({
-    type: GET_DOG_BY_ID,
-    payload: data
-  })
-};
-
 export const postDog = (payload) => async () => {
-  const res = await axios.post(URL + '/dog', payload);
-  console.log('posted dog', res);
-  return res;
+  try {
+    const res = await axios.post(URL + '/dog', payload);
+    console.log('posted dog', res);
+    alert('Raza creada con exito');
+    return res;
+  } catch (error) {
+    alert('No se pudo crear la raza', error);
+  }
+  
 }

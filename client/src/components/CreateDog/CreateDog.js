@@ -6,28 +6,22 @@ import s from './CreateDog.module.css';
 import video2 from '../../images/video2.mp4';
 
 const validateForm = (input) => {
-  let errors = {};
-  if (!input.name) return errors.name = 'Debe ingresar un nombre';
-  else if (!/(^[a-zA-z])([^0-9]*)([a-z]*)$/.test(input.name)) return errors.temperament = 'El nombre no puede contener numeros';
-  else if (!input.life_span) return errors.life_span = 'Debe otorgar la esperanza de vida';
-  else if (!/(^[0-9])([^a-zA-z]*)( - )([^a-zA-z]*)(\d)/.test(input.life_span)) return errors.life_span = 'Formato ingresado incorrecto';
-  else if (!input.temperament) return errors.temperament = 'Debe seleccionar al menos un temperamento';
-
-  return errors;
-};
-
-const validateMinMax = (input) => {
-  let errors = {};
-  if (!input.heightMin) errors.heightMin = 'Debe ingresar un valor';
+  const errors = {};
+  if (!input.name) errors.name = 'Debe ingresar un nombre';
+  else if (!/(^[a-zA-z])([^0-9]*)([a-z]*)$/.test(input.name)) errors.name = 'El nombre no puede contener numeros';
+  else if (!input.heightMin) errors.heightMin = 'Debe ingresar un valor';
   else if (!/^\d{1,2}$/.test(input.heightMin)) errors.heightMin = 'El valor debe ser un numero';
   else if (!input.heightMax) errors.heightMax = 'Debe ingresar un valor';
   else if (!/^\d{1,2}$/.test(input.heightMax)) errors.heightMax = 'El valor debe ser un numero';
-  else if (input.heightMin > input.heightMax) errors.weightMin = 'El valor debe ser mayor a la altura minima';
+  else if (input.heightMin > input.heightMax) errors.heightMax = 'El valor debe ser mayor a la altura minima';
   else if (!input.weightMin) errors.weightMin = 'Debe ingresar un valor';
   else if (!/^\d{1,2}$/.test(input.weightMin)) errors.weightMin = 'El valor debe ser un numero';
   else if (!input.weightMax) errors.weightMax = 'Debe ingresar un valor';
   else if (!/^\d{1,2}$/.test(input.weightMax)) errors.weightMax = 'El valor debe ser un numero';
   else if (input.weightMin > input.weightMax) errors.weightMax = 'El valor debe ser mayor al peso minimo';
+  else if (!input.life_span) errors.life_span = 'Debe otorgar la esperanza de vida';
+  else if (!/(^[0-9])([^a-zA-z]*)( - )([^a-zA-z]*)(\d)/.test(input.life_span)) errors.life_span = 'Formato ingresado incorrecto';
+
   return errors;
 };
 
@@ -35,31 +29,22 @@ export const CreateDog = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const temps = useSelector(state => state.temperaments);
-  const [formErrors, setFormErrors] = useState({});
-  const [minMaxErrors, setMinMaxErrors] = useState({});
-  const [minMaxInput, setMinMaxInput] = useState({
-    heightMin: '',
-    heightMax: '',
-    weightMin: '',
-    weightMax: ''
+  const [formErrors, setFormErrors] = useState({
+    name: 'Debe ingresar un nombre'
   });
   const [input, setInput] = useState({
     name: '',
-    height: '',
-    weight: '',
+    heightMin: '',
+    heightMax: '',
+    weightMin: '',
+    weightMax: '',
     life_span: '',
     temperament: []
   });
 
-  const enableDisable = () => {
-    if(input.name.length === 0 || input.life_span.length === 0 ||
-    input.temperament.length === 0 || input.height.length === 0 || input.weight.length === 0) {
-      return true
-    } else return false
-  }
-
   const handleChange = (e) => {
     e.preventDefault();
+
     setInput({
       ...input,
       [e.target.name]: e.target.value
@@ -68,25 +53,6 @@ export const CreateDog = () => {
       ...input,
       [e.target.name]: e.target.value
     }));
-  }
-
-  const handleMinMax = (e) => {
-    e.preventDefault();
-    setMinMaxInput({
-      ...minMaxInput,
-      [e.target.name]: e.target.value
-    })
-    setMinMaxErrors(validateMinMax({
-      ...minMaxInput,
-      [e.target.name]: e.target.value
-    }));
-    let wMax;
-    if (e.target.name === 'weightMax') wMax = e.target.value;
-    setInput({
-      ...input,
-      height: minMaxInput.heightMin + ' - ' + minMaxInput.heightMax,
-      weight: minMaxInput.weightMin + ' - ' + wMax,
-    });
   }
 
   const handleSelect = (e) => {
@@ -100,22 +66,32 @@ export const CreateDog = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('FORM VALUES', input);
-    dispatch(postDog(input))
-    setMinMaxInput({
+    const dogToPost = {
+      name: input.name,
+      height: input.heightMin + ' - ' + input.heightMax,
+      weight: input.weightMin + ' - ' + input.weightMax,
+      life_span: input.life_span,
+      temperament: input.temperament
+    }
+    dispatch(postDog(dogToPost))
+    setInput({
+      name: '',
       heightMin: '',
       heightMax: '',
       weightMin: '',
-      weightMax: ''
-    });
-    setInput({
-      name: '',
-      height: '',
-      weight: '',
+      weightMax: '',
       life_span: '',
       temperament: []
     });
     navigate('/home');
   };
+
+  const handleDelete = e => {
+    setInput({
+      ...input,
+      temperament: input.temperament.filter(t => t !== e.target.value)
+    });
+  }
 
   useEffect(() => {
     dispatch(getAllTemps())
@@ -135,49 +111,49 @@ export const CreateDog = () => {
           </div>
           <div>
             <label>Altura minima:</label>
-            <input className={s.formInputs} type={'text'} value={minMaxInput.heightMin} placeholder='Ej: 20' name='heightMin' onChange={e => handleMinMax(e)} />
-            {minMaxErrors.heightMin && (<p>{minMaxErrors.heightMin}</p>)}
+            <input className={s.formInputs} type={'text'} value={input.heightMin} placeholder='Ej: 20' name='heightMin' onChange={e => handleChange(e)} />
+            {formErrors.heightMin && (<p>{formErrors.heightMin}</p>)}
           </div>
           <div>
             <label>Altura maxima:</label>
-            <input className={s.formInputs} type={'text'} value={minMaxInput.heightMax} placeholder='Ej: 30' name='heightMax' onChange={e => handleMinMax(e)} />
-            {minMaxErrors.heightMax && (<p>{minMaxErrors.heightMax}</p>)}
+            <input className={s.formInputs} type={'text'} value={input.heightMax} placeholder='Ej: 30' name='heightMax' onChange={e => handleChange(e)} />
+            {formErrors.heightMax && (<p>{formErrors.heightMax}</p>)}
           </div>
           <div>
             <label>Peso minimo:</label>
-            <input className={s.formInputs} type={'text'} value={minMaxInput.weightMin} placeholder='Ej: 25' name='weightMin' onChange={e => handleMinMax(e)} />
-            {minMaxErrors.weightMin && (<p>{minMaxErrors.weightMin}</p>)}
+            <input className={s.formInputs} type={'text'} value={input.weightMin} placeholder='Ej: 25' name='weightMin' onChange={e => handleChange(e)} />
+            {formErrors.weightMin && (<p>{formErrors.weightMin}</p>)}
           </div>
           <div>
             <label>Peso maximo:</label>
-            <input className={s.formInputs} type={'text'} value={minMaxInput.weightMax} placeholder='Ej: 40' name='weightMax' onChange={e => handleMinMax(e)} />
-            {minMaxErrors.weightMax && (<p>{minMaxErrors.weightMax}</p>)}
+            <input className={s.formInputs} type={'text'} value={input.weightMax} placeholder='Ej: 40' name='weightMax' onChange={e => handleChange(e)} />
+            {formErrors.weightMax && (<p>{formErrors.weightMax}</p>)}
           </div>
           <div>
             <label>Esperanza de vida:</label>
             <input className={s.formInputs} type={'text'} value={input.life_span} name='life_span' placeholder='Ej: 10 - 15' onChange={e => handleChange(e)} />
             {formErrors.life_span && (<p>{formErrors.life_span}</p>)}
           </div>
-          <span className={s.selectedTemps}>
-            {input.temperament.map((t,i) => {
+          <div className={s.selectedTemps}>
+            {input.temperament.map(t => {
               return (
-                <div key={i}>
-                  <span>{t}</span><p>X</p>
+                <div key={t}>
+                  <span>{t}</span><button value={t} onClick={e => handleDelete(e)}>X</button>
                 </div>
               )
             })}
-          </span>
+          </div>
           <div>
             <label>Temperamento:</label>
             <select className={s.formInputs} onChange={e => handleSelect(e)}>
               {temps.map(t => <option key={t.id} value={t.name}>{t.name}</option>)}
             </select>
-            {formErrors.temperament && (<p>{formErrors.temperament}</p>)}
+            {!!(Object.keys(formErrors).length) ? null : input.temperament.length === 0 ? (<p>Debe selecionar al menos un temperamento</p>) : null}
           </div>
-          {console.log('input.name', input.name.length)}
-          <button type='submit' className={s.submitBtn}
-            disabled={enableDisable()}
-          >Crear Raza</button>
+          {console.log('errores', !!(Object.keys(formErrors).length))}
+          <button type='submit' className={s.submitBtn} disabled={input.temperament.length === 0 || !!formErrors.length}>
+            Crear Raza
+          </button>
 
         </form>
       </div>
