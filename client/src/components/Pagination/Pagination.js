@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import s from './Pagination.module.css';
 
@@ -6,19 +7,19 @@ export const Paginado = ({ dogsPerPage, allDogs, paginado, currentPage }) => {
   for (let i = 0; i <= Math.ceil(allDogs / dogsPerPage) - 1; i++) {
     pageNumbers.push(i + 1);
   }
-  console.log('pageNumbers.length', pageNumbers.length)
 
   return (
     <div className={s.container}>
-      <ul>
-        {currentPage > 1 ? (<button onClick={() => paginado(currentPage - 1)}>{'<<'}</button>) : (<button>{'<<'}</button>)}
-        {pageNumbers?.map(n => (
-          <li key={n}>
-            <button onClick={() => paginado(n)}>{n}</button>
-          </li>
-        ))}
-        {currentPage !== pageNumbers.length ? (<button onClick={() => paginado(currentPage + 1)}>{'>>'}</button>) : (<button>{'>>'}</button>)}
-      </ul>
+      {currentPage > 1 ?
+        (<button className={s.previous} href='#' onClick={() => paginado(currentPage - 1)}>{'<<'}</button>) :
+        (<button className={s.previous} href='#'>{'<<'}</button>)
+      }
+      {pageNumbers?.map(n => (
+        <button className={`${currentPage === n? s.selected : s.page}`} href='#' key={n} onClick={() => paginado(n)}>{n}</button>
+      ))}
+      {currentPage !== pageNumbers.length ?
+        (<button className={s.next} href='#' onClick={() => paginado(currentPage + 1)}>{'>>'}</button>) :
+        (<button className={s.next} href='#'>{'>>'}</button>)}
     </div>
   );
 };

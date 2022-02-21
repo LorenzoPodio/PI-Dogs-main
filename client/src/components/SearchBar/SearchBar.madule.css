@@ -1,4 +1,11 @@
 .search{
-  margin-top: 10px;
-  margin-bottom: 10px;
+  display: inline;
+}
+
+.search input {
+  background: #0000009a;
+  border: 1px solid #ffffffb4;
+  color: #ffffff;
+  border-radius: 5px;
+  opacity: 0.75;
 }

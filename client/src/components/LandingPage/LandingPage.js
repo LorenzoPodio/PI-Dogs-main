@@ -8,12 +8,12 @@ export const LandingPage = () => {
     <div className={s.container}>
       <div className={s.titulo}>
         <h1> TODO SOBRE PERROS </h1>
-      <div className={s.slogan}>
-        <h1>
-          "A un perro no le importa si eres rico o pobre, inteligente o tonto.
-          Dale tu corazón y él te dará el suyo" 
-        </h1>
-      </div>
+        <div className={s.slogan}>
+          <h1>
+            "A un perro no le importa si eres rico o pobre, inteligente o tonto.
+            Dale tu corazón y él te dará el suyo"
+          </h1>
+        </div>
       </div>
       <div className={s.container_btn}>
         <Link to={'/home'}>

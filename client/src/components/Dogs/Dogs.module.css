@@ -2,42 +2,26 @@
   text-align: center;
 }
 
-.filtro{
-  display: inline-block;
-}
-
 .background {
   object-fit: cover;
   width: 100%;
   height: 100vh;
   position: fixed;
   left: 0%;
+  top: 0%;
   z-index: -1;
 }
 
 .cards_container {
-  max-width: 1216px;
+  max-width: 89.7%;
   margin: auto;
 }
 
-.link {
-  margin-left: 5px;
-  margin-right: 5px;
-  text-decoration: none;
-  color: #ffffff87;
-  background: #00000079;
-  border: 1px solid #ffffff87;
-}
-
-.linkHome{
+.header {
   position: absolute;
-  top: 0%;
-  right: 8%;
-}
-.linkCrear{
-  position: absolute;
-  top: 0%;
-  right: 0%;
+  top: 10%;
+  background: #00000088;
+  border: 1px solid black;
 }
 
 /*SCROLLBAR*/
