@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getDogByName } from '../../redux/actions';
-import s from './SearchBar.madule.css';
+import s from './SearchBar.module.css';
 
 export const SearchBar = () => {
   const dispatch = useDispatch();

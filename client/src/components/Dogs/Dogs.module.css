@@ -17,9 +17,8 @@
   margin: auto;
 }
 
-.header {
-  position: absolute;
-  top: 10%;
+.header h1 {
+  color: white;
   background: #00000088;
   border: 1px solid black;
 }

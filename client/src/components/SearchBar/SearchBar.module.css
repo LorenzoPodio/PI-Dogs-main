@@ -1,5 +1,5 @@
 .search{
-  display: inline;
+  float: left;
 }
 
 .search input {

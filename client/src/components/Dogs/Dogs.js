@@ -44,7 +44,7 @@ export const Dogs = () => {
     <div className={s.container}>
       <video className={s.background} muted autoPlay loop src={video3} />
       <div className="header">
-        <h1>Estas son las razas de perros existentes</h1>
+        <h1>Razas de Perros</h1>
       </div>
       <SearchBar />
       <div>
