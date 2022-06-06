@@ -32,7 +32,7 @@ export const DogDetail = () => {
         <h2>Temperamento: {dog.temperament}</h2>
       </div>
       <Link to={'/home'}>
-        <button>Volver</button>
+        <button className={s.btnVolver}>Volver</button>
       </Link>
     </div>
   )

@@ -18,6 +18,7 @@
   text-align: center;
   border-radius: 20px;
   overflow-y: auto;
+  box-shadow: 0px 0px 50px black;
 }
 
 .container h1 {
@@ -43,8 +44,12 @@
 
 .form p{
   margin-top: 1%;
-  margin-left: 55%;
+  margin-left: 49%;
   margin-bottom: 0%;
+  color: red;
+  
+  background-color: #0000009a;
+  max-width: fit-content;
 }
 
 .formInputs {
@@ -58,21 +63,57 @@
   margin-right: 20px;
 }
 
-.form .submitBtn {
-  position: absolute;
-  right: 490px;
-  bottom: 60px;
+.submitBtn {
+  padding: 5px 0px;
+  width: 7rem;
+  background-color: #0000009a;
+  border-radius: 5px;
+  border: 1px solid black;
+  box-shadow: 0px 0px 10px black;
+  color: white;
+  position: fixed;
+  right: 27%;
+  bottom: 10%;
 }
 
+.selectedTemps {
+  border: 1px solid black;
+  margin-left: 70px;
+}
 .selectedTemps button {
   width: 20px;
+  padding: 2px;
   border: 1px solid #ffffffb4;
   background: #ff00007b;
   color: white;
 }
+.tempsSpan {
+  background-color: #0000009a;
+  color: #ffffffb4;
+  padding: 2px;
+  margin-left: 10px;
+}
+.firstSpan {
+  background-color: #0000009a;
+  color: #ffffffb4;
+  padding: 2px;
+  margin-left: 0px;
+}
 
-.btnVolver{
-  position: absolute;
+.btnVolver button {
+  padding: 5px 0px;
+  width: 7rem;
+  background-color: #0000009a;
+  border-radius: 5px;
+  border: 1px solid black;
+  box-shadow: 0px 0px 10px black;
+  color: white;
+  position: fixed;
   left: 27%;
   bottom: 10%;
+}
+
+.btnVolver button:hover, .submitBtn:hover{
+  cursor: pointer;
+  box-shadow: 0px 0px 10px white;
 }

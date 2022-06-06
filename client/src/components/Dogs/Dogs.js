@@ -43,9 +43,7 @@ export const Dogs = () => {
   return (
     <div className={s.container}>
       <video className={s.background} muted autoPlay loop src={video3} />
-      <div className="header">
-        <h1>Razas de Perros</h1>
-      </div>
+      <h1 className={s.title}>Razas de Perros</h1>
       <SearchBar />
       <div>
         <Filters
@@ -73,6 +71,14 @@ export const Dogs = () => {
               />
             ))
           }
+        </div>
+        <div className={s.pag}>
+          <Paginado
+            currentPage={currentPage}
+            dogsPerPage={dogsPerPage}
+            allDogs={allDogs.length}
+            paginado={paginado}
+          />
         </div>
       </div>
     </div>

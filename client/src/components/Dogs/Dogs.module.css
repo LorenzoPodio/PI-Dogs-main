@@ -17,10 +17,18 @@
   margin: auto;
 }
 
-.header h1 {
-  color: white;
-  background: #00000088;
+.title {
+  color: white !important;
+  background: rgba(0, 0, 0, 0.501);
   border: 1px solid black;
+  font-size: 350%;
+  margin-top: 0%;
+  height: 90px;
+  box-shadow: 0px 0px 15px black;
+}
+
+.pag{
+  margin-bottom: 20px;
 }
 
 /*SCROLLBAR*/

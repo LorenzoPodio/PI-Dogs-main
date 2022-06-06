@@ -87,6 +87,7 @@ export const CreateDog = () => {
   };
 
   const handleDelete = e => {
+    e.preventDefault();
     setInput({
       ...input,
       temperament: input.temperament.filter(t => t !== e.target.value)
@@ -100,7 +101,6 @@ export const CreateDog = () => {
   return (
     <div>
       <video className={s.background} muted autoPlay loop src={video2} />
-      <Link className={s.btnVolver} to={'/home'}><button>Volver a Home</button></Link>
       <div className={s.container}>
         <h1>CREÁ TU RAZA</h1>
         <form onSubmit={e => handleSubmit(e)} autoComplete='off' className={s.form}>
@@ -135,10 +135,10 @@ export const CreateDog = () => {
             {formErrors.life_span && (<p>{formErrors.life_span}</p>)}
           </div>
           <div className={s.selectedTemps}>
-            {input.temperament.map(t => {
+            {input.temperament.map((t,i) => {
               return (
-                <div key={t}>
-                  <span>{t}</span><button value={t} onClick={e => handleDelete(e)}>X</button>
+                <div key={i}>
+                  <span className={i === 0? s.firstSpan : s.tempsSpan}>{t}</span><button value={t} onClick={e => handleDelete(e)}>X</button>
                 </div>
               )
             })}
@@ -151,10 +151,10 @@ export const CreateDog = () => {
             {!!(Object.keys(formErrors).length) ? null : input.temperament.length === 0 ? (<p>Debe selecionar al menos un temperamento</p>) : null}
           </div>
           {console.log('errores', !!(Object.keys(formErrors).length))}
+          <Link className={s.btnVolver} to={'/home'}><button>Volver a Home</button></Link>
           <button type='submit' className={s.submitBtn} disabled={input.temperament.length === 0 || !!formErrors.length}>
             Crear Raza
           </button>
-
         </form>
       </div>
     </div>

@@ -24,12 +24,16 @@ export const SearchBar = () => {
 
   return (
     <div className={s.search}>
-      <Link className={s.link} to={'/'}>Inicio</Link>
-      <Link className={s.link} to={'/dog/create'}>Crear Raza</Link>
+      <div className={s.linkContainer}>
+        <Link className={s.link} to={'/'}>Inicio</Link>
+      </div>
       <form onSubmit={e => handleSubmit(e)}>
         <input type={'text'} placeholder='Buscar Raza..' value={name} onChange={e => handleInputChange(e)} />
         <button type='submit'>Buscar</button>
       </form>
+      <div className={s.linkContainer}>
+        <Link className={s.link} to={'/dog/create'}>Crear Raza</Link>
+      </div>
     </div>
   );
 };
