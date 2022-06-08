@@ -10,7 +10,7 @@ export const POST_DOG = 'POST_DOG';
 export const GET_DOG_BY_ID = 'GET_DOG_BY_ID';
 export const GET_DOG_BY_NAME = 'GET_DOG_BY_NAME';
 
-const URL = 'http://localhost:3001'
+const URL = 'https://dogs-app-api.herokuapp.com'
 
 export const getAllDogs = () => async dispatch => {
   const { data } = await axios(`${URL}/dogs`);
